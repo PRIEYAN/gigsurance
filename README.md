@@ -6,16 +6,58 @@
 
 ---
 
-**Breaking down Gigsurance in Four Steps**
+# Breaking down Gigsurance in Four Steps
 
-**1. Who is our user really?**
-**2. How does our AI actually work**
-**3. How does it get built?**
-**4. Gigsurance - Our Final Delivery**
+**1. Who is our user really?**  
+**2. How does our AI actually work**  
+**3. How does it get built?**  
+**4. Gigsurance - Our Final Delivery**  
+
+# 1️⃣ Who is our user really? - Tip of the ICE
+
+<p align="center">
+  <img src="https://github.com/Madan94/gigsurance/blob/main/assets/GigSurance%20(1).png" alt="Gigsurance Banner" width="100%" />
+</p>
+
+# ⚠️ The Actual Problem
+
+**One line Statement - No financial safety net for loss of working time for India's Gig Workers**
+
+**So, What type of Gig Workers are you targeting?**
+
+# 🧑 Revealing our Target User Persona
+
+**1. Our Focused Persona - Metro Cities based Gig Delivery Workers**  
+**2. Total no of active Gig Workers in Metro Cities - 25 Lakhs**  
+**3. Source link** : [https://www.outlookbusiness.com/news/pay-education-demographics-what-the-numbers-say-about-indias-1-crore-gig-workers]
+
+# Our Focused Metro Cities for Gig Workers
+
+| City        | Estimated Gig Workers | Key Risk Factors              |
+|------------|---------------------|------------------------------|
+| Bangalore   | 4–6 lakh+           | Rain, traffic, high demand   |
+| Delhi NCR   | 5–7 lakh+           | Pollution, traffic, curfews  |
+| Mumbai      | 3–5 lakh+           | Heavy rain, congestion       |
+| Chennai     | 3–4 lakh+           | Flooding, cyclones           |
+| Hyderabad   | 2–3 lakh+           | Supply disruptions           |
+| Pune        | 1.5–2.5 lakh+       | Traffic, demand spikes       |
+| Kolkata     | 1–2 lakh+           | Weather + infra disruptions  |
+
+# Our Focused Working Models
+
+| S.no | Type of Model | Platforms | Working Time | Peak hours |
+|--------|-------------|----------|---------|---------|
+| 1. | Food Delivery | Zomato, Swiggy | 10-12 hrs/day | Lunch + Dinner Time |
+| 2. | Quick Commerce | Zepto, Blinkit, Swiggy Instamart | 9-10 hrs/day | Continuous & Seasoned Demands |
+| 3. | E-Commerce | Amazon, Flipkart | 8-10 hrs/day | Scheduled Activities |
+
+# Disruptions Covering under Gigsurance
 
 
 
-# Who is your user really?
+
+
+
 
 <div align="center">
 
