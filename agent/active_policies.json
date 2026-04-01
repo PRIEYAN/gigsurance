@@ -1,0 +1,30 @@
+[
+  {
+    "worker_id": "ZOM-CHN-001",
+    "name": "Rahul T.",
+    "region": "Chennai",
+    "plan": "Basic", 
+    "daily_coverage": 500
+  },
+  {
+    "worker_id": "SWG-CHN-002",
+    "name": "Priya S.",
+    "region": "Chennai",
+    "plan": "Premium",
+    "daily_coverage": 1200
+  },
+  {
+    "worker_id": "ZEP-BLR-003",
+    "name": "Amit K.",
+    "region": "Bengaluru",
+    "plan": "Pro",
+    "daily_coverage": 800
+  },
+  {
+    "worker_id": "AMZ-BOM-004",
+    "name": "Vikram M.",
+    "region": "Mumbai",
+    "plan": "Basic",
+    "daily_coverage": 500
+  }
+]

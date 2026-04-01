@@ -1,0 +1,167 @@
+{
+  "batch_id": "WEEK_MAR_23_29",
+  "active_regions": ["Chennai", "Bengaluru", "Mumbai"],
+  "daily_news_payloads": [
+    {
+      "date": "2026-03-23",
+      "news": {
+        "Chennai": [
+          {
+            "title": "Mild showers in Chennai",
+            "description": "Light rainfall reported across parts of Chennai with minimal waterlogging in low-lying areas. Traffic is moving steadily and food delivery services continue without interruptions. Gig workers report normal order volumes and no safety concerns."
+          }
+        ],
+        "Bengaluru": [
+          {
+            "title": "Clear skies in Blr",
+            "description": "Weather conditions remain stable with clear skies throughout Bengaluru. Road traffic is smooth, and delivery operations are functioning at full capacity. No reports of disruptions affecting gig workers."
+          }
+        ],
+        "Mumbai": [
+          {
+            "title": "Sunny in Mumbai",
+            "description": "Bright sunny conditions across Mumbai with no environmental or logistical disruptions. Delivery platforms are operating normally, and workers are completing orders without delays or restrictions."
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-03-24",
+      "news": {
+        "Chennai": [
+          {
+            "title": "Heavy downpours waterlog OMR",
+            "description": "Continuous heavy rainfall has led to severe waterlogging in key areas such as OMR and Velachery. Several roads are partially submerged, causing traffic congestion and delays. Major food delivery platforms have suspended services in affected zones citing rider safety concerns, impacting gig worker earnings."
+          }
+        ],
+        "Bengaluru": [
+          {
+            "title": "Traffic normal",
+            "description": "Daily commute across Bengaluru remains unaffected with no major traffic jams or weather disruptions. Delivery partners are able to complete orders efficiently, and business operations continue as usual."
+          }
+        ],
+        "Mumbai": [
+          {
+            "title": "Hot day in Mumbai",
+            "description": "High temperatures recorded across Mumbai, but no disruptions to transport or logistics. Delivery workers continue operations normally, with no reported delays or safety concerns."
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-03-25",
+      "news": {
+        "Chennai": [
+          {
+            "title": "Red Alert: Chennai paralyzed",
+            "description": "Authorities have issued a red alert as extreme flooding has brought Chennai to a standstill. Major roads are inaccessible, public transport is halted, and commercial establishments are closed. Food and grocery delivery platforms have completely stopped operations, leaving gig workers unable to work."
+          }
+        ],
+        "Bengaluru": [
+          {
+            "title": "Pleasant weather",
+            "description": "Comfortable weather conditions across Bengaluru with no interruptions to daily activities. Delivery services are running smoothly, and gig workers are experiencing standard workload and earnings."
+          }
+        ],
+        "Mumbai": [
+          {
+            "title": "Clear skies",
+            "description": "Clear and stable weather across Mumbai. All logistics and delivery services are functioning normally with no reported disruptions."
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-03-26",
+      "news": {
+        "Chennai": [
+          {
+            "title": "Water receding slowly",
+            "description": "Floodwaters are gradually receding in Chennai, but several neighborhoods remain waterlogged. Limited delivery services have resumed in northern zones, while southern areas continue to face accessibility issues. Gig workers report reduced order availability and partial income loss."
+          }
+        ],
+        "Bengaluru": [
+          {
+            "title": "Transport unions threaten strike",
+            "description": "Transport unions have announced a potential strike following failed negotiations with authorities. While operations continue today, uncertainty looms, and delivery partners are preparing for possible disruptions starting tomorrow."
+          }
+        ],
+        "Mumbai": [
+          {
+            "title": "Normal operations",
+            "description": "No significant changes in weather or traffic conditions across Mumbai. Delivery services and gig work continue without interruptions."
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-03-27",
+      "news": {
+        "Chennai": [
+          {
+            "title": "Chennai back to normal",
+            "description": "Weather conditions have stabilized, and most roads are cleared of water. Delivery services have resumed across the city, and gig workers are back to normal operations with regular order flow."
+          }
+        ],
+        "Bengaluru": [
+          {
+            "title": "Flash Strike Paralyzes Bengaluru",
+            "description": "A sudden transport strike has caused widespread disruption across Bengaluru. Road blockades and enforcement of Section 144 in several zones have halted logistics movement. Delivery workers are unable to access pickup locations, leading to a complete stop in operations."
+          }
+        ],
+        "Mumbai": [
+          {
+            "title": "Normal traffic",
+            "description": "Traffic and logistics operations across Mumbai remain stable. Delivery partners are completing orders without delays or restrictions."
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-03-28",
+      "news": {
+        "Chennai": [
+          {
+            "title": "Weekend surge",
+            "description": "With improved weather conditions, Chennai is witnessing a surge in delivery orders over the weekend. Gig workers are actively fulfilling increased demand and recovering from previous disruptions."
+          }
+        ],
+        "Bengaluru": [
+          {
+            "title": "Strike called off",
+            "description": "Transport strike has been officially called off, and delivery services are resuming. However, backlog from previous disruptions is causing minor delays in some areas, slightly affecting efficiency."
+          }
+        ],
+        "Mumbai": [
+          {
+            "title": "Weekend normal",
+            "description": "Weekend operations continue smoothly across Mumbai with steady order volumes and no disruptions affecting delivery workers."
+          }
+        ]
+      }
+    },
+    {
+      "date": "2026-03-29",
+      "news": {
+        "Chennai": [
+          {
+            "title": "Clear weather",
+            "description": "Clear skies and dry conditions across Chennai. All delivery operations are functioning normally, and gig workers report stable earnings and no disruptions."
+          }
+        ],
+        "Bengaluru": [
+          {
+            "title": "Operations normalized",
+            "description": "All services have returned to full capacity in Bengaluru following the earlier strike. Delivery partners are working normally with no restrictions or delays."
+          }
+        ],
+        "Mumbai": [
+          {
+            "title": "Clear skies",
+            "description": "Stable weather conditions with no disruptions across Mumbai. Delivery operations and logistics continue as usual."
+          }
+        ]
+      }
+    }
+  ]
+}

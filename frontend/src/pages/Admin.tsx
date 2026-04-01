@@ -1,7 +1,7 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   LayoutDashboard, Zap, Users, CreditCard, MapPin, Settings, Bell, ChevronDown,
-  AlertTriangle, CheckCircle, Clock, ArrowUpRight, TrendingUp, Shield
+  AlertTriangle, CheckCircle, Clock, ArrowUpRight, TrendingUp, Shield, AlertCircle, BarChart3
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -15,30 +15,86 @@ const navItems = [
   { icon: Settings, label: "Settings", path: "/admin/settings" },
 ];
 
-const stats = [
-  { label: "Active Workers", value: "12,847", change: "+234", icon: Users, trend: "up" },
-  { label: "Today's Payouts", value: "₹4.2L", change: "+₹87K", icon: CreditCard, trend: "up" },
-  { label: "Events Detected", value: "23", change: "+5", icon: Zap, trend: "up" },
-  { label: "Trust Violations", value: "3", change: "-2", icon: AlertTriangle, trend: "down" },
-];
-
-const events = [
-  { id: 1, type: "weather", severity: "high", title: "Heavy rainfall — Mumbai Andheri", time: "12 min ago", affected: 342, status: "active" },
-  { id: 2, type: "platform", severity: "medium", title: "Swiggy API latency spike", time: "28 min ago", affected: 156, status: "monitoring" },
-  { id: 3, type: "traffic", severity: "low", title: "Road closure — Bangalore HSR Layout", time: "1h ago", affected: 89, status: "resolved" },
-  { id: 4, type: "heat", severity: "high", title: "Extreme heat warning — Delhi NCR (46°C)", time: "2h ago", affected: 521, status: "active" },
-];
-
-const approvals = [
-  { id: 1, worker: "Amit Kumar", event: "Heavy rainfall", amount: "₹1,200", trust: 92, status: "pending" },
-  { id: 2, worker: "Priya Singh", event: "Platform outage", amount: "₹800", trust: 88, status: "pending" },
-  { id: 3, worker: "Rajesh Patel", event: "Heat warning", amount: "₹500", trust: 45, status: "flagged" },
-  { id: 4, worker: "Meena Devi", event: "Heavy rainfall", amount: "₹1,200", trust: 91, status: "pending" },
-  { id: 5, worker: "Vikram Rao", event: "Traffic disruption", amount: "₹650", trust: 78, status: "pending" },
-];
+// Sample regions data
+const regionsData = {
+  "Chennai": {
+    totalUsers: 1200,
+    planDistribution: { Basic: 600, Pro: 400, Premium: 200 },
+    disruptionStatus: "2 Days Lost Logged This Week",
+    aiAuditLog: [
+      {
+        date: "March 25, 2026",
+        confidence: 0.95,
+        severity: "high",
+        reason: "Red alert issued by IMD. City paralyzed by waterlogging. 100% loss of working hours for food delivery executives."
+      },
+      {
+        date: "March 24, 2026",
+        confidence: 0.78,
+        severity: "medium",
+        reason: "Traffic congestion detected. 45% of workers reported delays. Estimated 2-3 hour impact."
+      },
+      {
+        date: "March 23, 2026",
+        confidence: 0.92,
+        severity: "high",
+        reason: "Extreme heat warning (42°C). Health department advisory issued. 80% loss of daytime hours."
+      }
+    ],
+    settlements: [
+      { tier: "Basic", affected: 120, daysLost: 2, dailyRate: 500, total: 1200, status: "Scheduled for Sunday Auto-Transfer" },
+      { tier: "Pro", affected: 80, daysLost: 2, dailyRate: 800, total: 1600, status: "Scheduled for Sunday Auto-Transfer" },
+      { tier: "Premium", affected: 40, daysLost: 2, dailyRate: 1200, total: 2400, status: "Scheduled for Sunday Auto-Transfer" },
+    ]
+  },
+  "Mumbai": {
+    totalUsers: 2100,
+    planDistribution: { Basic: 1050, Pro: 700, Premium: 350 },
+    disruptionStatus: "1 Day Lost This Week",
+    aiAuditLog: [
+      {
+        date: "March 25, 2026",
+        confidence: 0.88,
+        severity: "medium",
+        reason: "Monsoon warning issued. Moderate rainfall expected. 50% potential disruption."
+      }
+    ],
+    settlements: [
+      { tier: "Basic", affected: 210, daysLost: 1, dailyRate: 500, total: 105000, status: "Scheduled for Sunday Auto-Transfer" },
+      { tier: "Pro", affected: 140, daysLost: 1, dailyRate: 800, total: 112000, status: "Scheduled for Sunday Auto-Transfer" },
+      { tier: "Premium", affected: 70, daysLost: 1, dailyRate: 1200, total: 84000, status: "Scheduled for Sunday Auto-Transfer" },
+    ]
+  },
+  "Delhi NCR": {
+    totalUsers: 1800,
+    planDistribution: { Basic: 900, Pro: 600, Premium: 300 },
+    disruptionStatus: "Critical - 3 Days Lost This Week",
+    aiAuditLog: [
+      {
+        date: "March 25, 2026",
+        confidence: 0.96,
+        severity: "critical",
+        reason: "Stage 4 air quality alert. AQI 450+. Complete halt of outdoor delivery operations. Emergency protocols activated."
+      },
+      {
+        date: "March 24, 2026",
+        confidence: 0.93,
+        severity: "high",
+        reason: "Stage 3 pollution alert. AQI 380. 90% reduction in active workers."
+      }
+    ],
+    settlements: [
+      { tier: "Basic", affected: 270, daysLost: 3, dailyRate: 500, total: 405000, status: "Scheduled for Sunday Auto-Transfer" },
+      { tier: "Pro", affected: 180, daysLost: 3, dailyRate: 800, total: 432000, status: "Scheduled for Sunday Auto-Transfer" },
+      { tier: "Premium", affected: 90, daysLost: 3, dailyRate: 1200, total: 324000, status: "Scheduled for Sunday Auto-Transfer" },
+    ]
+  },
+};
 
 export default function Admin() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
+  const regions = Object.keys(regionsData) as (keyof typeof regionsData)[];
 
   return (
     <div className="min-h-screen bg-background flex">
@@ -86,124 +142,165 @@ export default function Admin() {
         </header>
 
         <main className="flex-1 p-6 overflow-auto">
-          {/* Stats */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            {stats.map((stat) => (
-              <div key={stat.label} className="bg-card rounded-2xl border border-border/50 shadow-sm p-5">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs text-muted-foreground">{stat.label}</span>
-                  <stat.icon className="h-4 w-4 text-muted-foreground" />
-                </div>
-                <p className="text-2xl font-serif">{stat.value}</p>
-                <p className={`text-xs mt-1 flex items-center gap-1 ${stat.trend === "up" ? "text-success" : "text-warning"}`}>
-                  <TrendingUp className="h-3 w-3" /> {stat.change} today
-                </p>
+          {/* SECTION 1: GLOBAL COMMAND CENTER */}
+          <div className="mb-8">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="bg-card rounded-2xl border border-border/50 shadow-sm p-6">
+                <span className="text-xs text-muted-foreground block mb-2">Total Active Policies</span>
+                <p className="text-4xl font-serif font-bold text-foreground">47,200</p>
+                <p className="text-xs text-success mt-2 flex items-center gap-1"><TrendingUp className="h-3 w-3" /> +2,340 this month</p>
               </div>
-            ))}
-          </div>
-
-          <div className="grid lg:grid-cols-5 gap-6">
-            {/* Events Feed */}
-            <div className="lg:col-span-2">
-              <h2 className="font-serif text-lg mb-4">Live Disruption Events</h2>
-              <div className="space-y-3">
-                {events.map((e) => (
-                  <div key={e.id} className="bg-card rounded-xl border border-border/50 shadow-sm p-4">
-                    <div className="flex items-start justify-between mb-2">
-                      <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
-                        e.severity === "high" ? "bg-destructive/10 text-destructive"
-                          : e.severity === "medium" ? "bg-warning/10 text-warning"
-                          : "bg-muted text-muted-foreground"
-                      }`}>
-                        {e.severity.toUpperCase()}
-                      </span>
-                      <span className="text-[10px] text-muted-foreground">{e.time}</span>
-                    </div>
-                    <p className="text-sm font-medium mb-1">{e.title}</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs text-muted-foreground">{e.affected} workers affected</span>
-                      <span className={`text-[10px] flex items-center gap-1 ${
-                        e.status === "active" ? "text-destructive" : e.status === "monitoring" ? "text-warning" : "text-success"
-                      }`}>
-                        {e.status === "active" ? <AlertTriangle className="h-3 w-3" /> :
-                         e.status === "resolved" ? <CheckCircle className="h-3 w-3" /> :
-                         <Clock className="h-3 w-3" />}
-                        {e.status}
-                      </span>
-                    </div>
-                  </div>
-                ))}
+              <div className="bg-card rounded-2xl border border-border/50 shadow-sm p-6">
+                <span className="text-xs text-muted-foreground block mb-2">Total Weekly Premiums</span>
+                <p className="text-4xl font-serif font-bold text-foreground">₹84.5L</p>
+                <p className="text-xs text-success mt-2 flex items-center gap-1"><TrendingUp className="h-3 w-3" /> +₹12L week-on-week</p>
+              </div>
+              <div className="bg-card rounded-2xl border border-border/50 shadow-sm p-6">
+                <span className="text-xs text-muted-foreground block mb-2">Total Pending Payouts</span>
+                <p className="text-4xl font-serif font-bold text-foreground">₹32.8L</p>
+                <p className="text-xs text-warning mt-2">Scheduled for Sunday Auto-Transfer</p>
+              </div>
+              <div className="bg-card rounded-2xl border border-border/50 shadow-sm p-6">
+                <span className="text-xs text-muted-foreground block mb-2">Active Red Alerts</span>
+                <p className="text-4xl font-serif font-bold text-destructive">3</p>
+                <p className="text-xs text-destructive mt-2 flex items-center gap-1"><AlertCircle className="h-3 w-3" /> Delhi NCR · Chennai · Mumbai</p>
               </div>
             </div>
+          </div>
 
-            {/* Payout Approvals */}
-            <div className="lg:col-span-3">
-              <h2 className="font-serif text-lg mb-4">Payout Approval Queue</h2>
-              <div className="bg-card rounded-2xl border border-border/50 shadow-sm overflow-hidden">
+          {/* SECTION 2: REGION EXPLORER */}
+          <div className="mb-8">
+            <div className="relative">
+              <div className="relative inline-block w-full sm:w-72">
+                <select
+                  value={selectedRegion || ""}
+                  onChange={(e) => setSelectedRegion(e.target.value || null)}
+                  className="w-full appearance-none bg-card border border-border/50 rounded-xl px-4 py-3 text-sm font-medium cursor-pointer hover:border-border transition-colors"
+                >
+                  <option value="">Select Region: Choose a city...</option>
+                  {regions.map((region) => (
+                    <option key={region} value={region}>{region}</option>
+                  ))}
+                </select>
+                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+              </div>
+            </div>
+          </div>
+
+          {/* SECTION 3: REGION DETAILS */}
+          {selectedRegion && (
+            <div className="space-y-6">
+              {/* A. Business Snapshot */}
+              <div className="grid lg:grid-cols-3 gap-6">
+                <div className="bg-card rounded-2xl border border-border/50 shadow-sm p-6">
+                  <h3 className="font-serif text-lg mb-4">Business Snapshot</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <span className="text-xs text-muted-foreground block mb-1">Total {selectedRegion} Users</span>
+                      <p className="text-2xl font-serif font-bold">{regionsData[selectedRegion].totalUsers.toLocaleString()}</p>
+                    </div>
+                    <div className="pt-4 border-t border-border/30">
+                      <span className="text-xs text-muted-foreground block mb-3">Plan Distribution</span>
+                      {Object.entries(regionsData[selectedRegion].planDistribution).map(([plan, count]) => (
+                        <div key={plan} className="flex items-center justify-between mb-2">
+                          <span className="text-sm">{plan}</span>
+                          <div className="flex items-center gap-2">
+                            <div className="w-32 h-2 bg-muted rounded-full overflow-hidden">
+                              <div
+                                className={`h-full ${
+                                  plan === "Basic" ? "bg-blue-500" : plan === "Pro" ? "bg-purple-500" : "bg-amber-500"
+                                }`}
+                                style={{width: `${(count / regionsData[selectedRegion].totalUsers) * 100}%`}}
+                              />
+                            </div>
+                            <span className="text-xs text-muted-foreground w-12">{count}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* B. AI Brain */}
+                <div className="lg:col-span-2 bg-card rounded-2xl border border-border/50 shadow-sm p-6">
+                  <h3 className="font-serif text-lg mb-4">AI Brain</h3>
+                  <div className="space-y-3 mb-4 pb-4 border-b border-border/30">
+                    <div>
+                      <span className="text-xs text-muted-foreground">Current Disruption Status</span>
+                      <p className="text-sm font-medium text-foreground mt-1">{regionsData[selectedRegion].disruptionStatus}</p>
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-xs text-muted-foreground block mb-3">AI Audit Log</span>
+                    <div className="space-y-3 max-h-64 overflow-y-auto">
+                      {regionsData[selectedRegion].aiAuditLog.map((log, idx) => (
+                        <div key={idx} className="bg-muted/50 rounded-lg p-3 border border-border/30">
+                          <div className="flex items-start justify-between mb-2">
+                            <span className="text-[10px] text-muted-foreground">{log.date}</span>
+                            <div className="flex items-center gap-2">
+                              <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${
+                                log.severity === "critical" ? "bg-destructive text-white" :
+                                log.severity === "high" ? "bg-destructive/20 text-destructive" :
+                                "bg-warning/20 text-warning"
+                              }`}>
+                                {log.severity.toUpperCase()}
+                              </span>
+                              <span className="text-xs font-semibold text-foreground px-2 py-0.5 bg-primary/20 text-primary rounded">
+                                {(log.confidence * 100).toFixed(0)}% confidence
+                              </span>
+                            </div>
+                          </div>
+                          <p className="text-xs text-foreground leading-relaxed">{log.reason}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* C. Automated Settlement Ledger */}
+              <div className="bg-card rounded-2xl border border-border/50 shadow-sm p-6">
+                <h3 className="font-serif text-lg mb-4">Pending Sunday Settlements for {selectedRegion}</h3>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="text-xs text-muted-foreground border-b border-border/50 bg-muted/30">
-                        <th className="text-left p-4 font-medium">Worker</th>
-                        <th className="text-left p-4 font-medium">Event</th>
-                        <th className="text-right p-4 font-medium">Amount</th>
-                        <th className="text-center p-4 font-medium">Trust</th>
-                        <th className="text-right p-4 font-medium">Action</th>
+                        <th className="text-left p-4 font-medium">Plan Tier</th>
+                        <th className="text-center p-4 font-medium">Affected Workers</th>
+                        <th className="text-center p-4 font-medium">Days Lost</th>
+                        <th className="text-right p-4 font-medium">Daily Coverage Rate</th>
+                        <th className="text-right p-4 font-medium">Total Auto-Payout</th>
+                        <th className="text-center p-4 font-medium">Status</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {approvals.map((a) => (
-                        <tr key={a.id} className="border-b border-border/30 last:border-0">
-                          <td className="p-4 font-medium">{a.worker}</td>
-                          <td className="p-4 text-muted-foreground">{a.event}</td>
-                          <td className="p-4 text-right font-medium">{a.amount}</td>
+                      {regionsData[selectedRegion].settlements.map((settlement, idx) => (
+                        <tr key={idx} className="border-b border-border/30 last:border-0 hover:bg-muted/50 transition-colors">
+                          <td className="p-4 font-medium">{settlement.tier}</td>
+                          <td className="p-4 text-center">{settlement.affected}</td>
+                          <td className="p-4 text-center">{settlement.daysLost}</td>
+                          <td className="p-4 text-right font-medium">₹{settlement.dailyRate.toLocaleString()}</td>
+                          <td className="p-4 text-right font-semibold text-foreground">₹{settlement.total.toLocaleString()}</td>
                           <td className="p-4 text-center">
-                            <span className={`text-xs font-medium px-2 py-1 rounded-full ${
-                              a.trust >= 80 ? "bg-success/10 text-success"
-                                : a.trust >= 60 ? "bg-warning/10 text-warning"
-                                : "bg-destructive/10 text-destructive"
-                            }`}>
-                              {a.trust}
+                            <span className="text-[10px] font-medium px-2.5 py-1.5 rounded-full bg-success/20 text-success">
+                              ✓ Scheduled
                             </span>
-                          </td>
-                          <td className="p-4 text-right">
-                            <div className="flex justify-end gap-2">
-                              <Button size="sm" variant="default" className="h-7 text-xs px-3">
-                                Approve
-                              </Button>
-                              {a.status === "flagged" && (
-                                <Button size="sm" variant="outline" className="h-7 text-xs px-3">
-                                  Review
-                                </Button>
-                              )}
-                            </div>
                           </td>
                         </tr>
                       ))}
+                      <tr className="bg-muted/50 border-t border-border/50">
+                        <td colSpan={4} className="p-4 font-semibold text-right">Total Weekly Payout:</td>
+                        <td className="p-4 text-right font-serif text-lg font-bold text-foreground">
+                          ₹{regionsData[selectedRegion].settlements.reduce((sum, s) => sum + s.total, 0).toLocaleString()}
+                        </td>
+                        <td className="p-4"></td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
               </div>
-
-              {/* Zone Monitoring */}
-              <h2 className="font-serif text-lg mt-8 mb-4">Zone Monitoring</h2>
-              <div className="bg-card rounded-2xl border border-border/50 shadow-sm p-6">
-                <div className="grid grid-cols-3 gap-4 mb-4">
-                  {["Mumbai", "Delhi NCR", "Bangalore"].map((city) => (
-                    <div key={city} className="text-center p-3 rounded-xl bg-muted/50">
-                      <p className="text-sm font-medium">{city}</p>
-                      <p className="text-xs text-muted-foreground mt-1">
-                        {city === "Mumbai" ? "⚠️ 2 active" : city === "Delhi NCR" ? "🔴 1 critical" : "✅ Clear"}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-                <div className="h-40 rounded-xl bg-muted flex items-center justify-center text-sm text-muted-foreground">
-                  <MapPin className="h-5 w-5 mr-2" /> Zone heatmap visualization
-                </div>
-              </div>
             </div>
-          </div>
+          )}
         </main>
       </div>
     </div>
